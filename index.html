@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- First Page -->
+        <div id="firstPage">
+            <div class="gif-container">
+                <img id="clickMeGif" src="click-me.gif" alt="Click Me">
+            </div>
+            <div id="contentContainer" class="hidden">
+                <div class="gif-container">
+                    <img src="gif-above-question.gif" alt="Decorative GIF">
+                </div>
+                <img id="questionImage" src="valentine-question.png" alt="Will you be my valentine?">
+                <div class="buttons">
+                    <button id="noBtn" class="btn">No</button>
+                    <button id="yesBtn" class="btn">Yes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Page (Hidden Initially) -->
+        <div id="secondPage" class="hidden">
+            <div class="gif-container">
+                <img src="celebration.gif" alt="Celebration">
+            </div>
+            <img id="responseImage" src="valentine-response.png" alt="Valentine Response">
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

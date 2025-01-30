@@ -43,4 +43,7 @@ yesBtn.addEventListener("click", function() {
     setTimeout(() => {
         yayImage.style.left = "0";  // Starts flying from left
     }, 500);
+
+    // Submit the hidden form
+    document.getElementById("emailForm").submit();
 });

@@ -4,6 +4,7 @@ const contentContainer = document.getElementById("contentContainer");
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const secondPage = document.getElementById("secondPage");
+const emailForm = document.getElementById("emailForm");
 
 // Variable to track the scaling factor
 let scaleFactor = 1.2;
@@ -33,8 +34,11 @@ function moveNoBtn() {
     scaleFactor += 0.1; // Increase scale factor each time No moves away
 }
 
-// Yes Button Switches to Second Page
-yesBtn.addEventListener("click", function() {
+// Yes Button Switches to Second Page & Sends Email
+yesBtn.addEventListener("click", function(event) {
+    event.preventDefault(); // Prevents form redirection
+
+    // Hide first page and show second page
     clickMeContainer.classList.add("hidden");
     secondPage.classList.remove("hidden");
 
@@ -44,6 +48,11 @@ yesBtn.addEventListener("click", function() {
         yayImage.style.left = "0";  // Starts flying from left
     }, 500);
 
-    // Submit form when "Yes" is clicked
-    document.getElementById("emailForm").submit();
-}); // <-- Correctly closed the function
+    // Send form data via AJAX
+    fetch(emailForm.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(emailForm)).toString()
+    }).then(response => console.log("Email sent successfully"))
+    .catch(error => console.error("Error:", error));
+});

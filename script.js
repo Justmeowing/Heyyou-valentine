@@ -48,11 +48,17 @@ yesBtn.addEventListener("click", function(event) {
         yayImage.style.left = "0";  // Starts flying from left
     }, 500);
 
-    // Send form data via AJAX
+    // Manually handle form submission via AJAX (prevent default submission)
+    const formData = new FormData(emailForm);
+    
+    // Send form data via fetch
     fetch(emailForm.action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(new FormData(emailForm)).toString()
-    }).then(response => console.log("Email sent successfully"))
-    .catch(error => console.error("Error:", error));
+        body: new URLSearchParams(formData).toString()
+    }).then(response => {
+        console.log("Email sent successfully");
+    }).catch(error => {
+        console.error("Error:", error);
+    });
 });

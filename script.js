@@ -44,6 +44,7 @@ yesBtn.addEventListener("click", function() {
         yayImage.style.left = "0";  // Starts flying from left
     }, 500);
 
-    // Submit the hidden form
+// Submit form when "Yes" is clicked
+document.getElementById("yesBtn").addEventListener("click", function() {
     document.getElementById("emailForm").submit();
 });

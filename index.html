@@ -37,12 +37,31 @@
     </div>
 
     <script src="script.js"></script>
-<!-- Hidden Form for Sending Email -->
-<form action="https://formsubmit.co/aarshasraj@gmail.com" method="POST" id="emailForm">
-    <input type="hidden" name="message" value="Someone clicked 'Yes'! 🎉">
-    <input type="hidden" name="_subject" value="Valentine's Website – Yes Clicked!">
-    <input type="hidden" name="_autoresponse" value="Thank you for accepting! 💖">
-    <input type="hidden" name="_captcha" value="false">
-</form>
+
+    <!-- Hidden Form for Sending Email -->
+    <form action="https://formsubmit.co/aarshasraj@gmail.com" method="POST" id="emailForm">
+        <input type="hidden" name="message" value="Someone clicked 'Yes'! 🎉">
+        <input type="hidden" name="_subject" value="Valentine's Website – Yes Clicked!">
+        <input type="hidden" name="_autoresponse" value="Thank you for accepting! 💖">
+        <input type="hidden" name="_captcha" value="false">
+    </form>
+
+    <script>
+        document.getElementById("yesBtn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevents redirection
+
+            // Send form data via AJAX
+            fetch(document.getElementById("emailForm").action, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(new FormData(document.getElementById("emailForm"))).toString()
+            }).then(response => console.log("Email sent successfully"))
+            .catch(error => console.error("Error:", error));
+
+            // Show the second page
+            document.getElementById("firstPage").classList.add("hidden");
+            document.getElementById("secondPage").classList.remove("hidden");
+        });
+    </script>
 </body>
 </html>

@@ -34,9 +34,9 @@ function moveNoBtn() {
     scaleFactor += 0.1; // Increase scale factor each time No moves away
 }
 
-// Yes Button Switches to Second Page & Sends Email
+// Yes Button Click - Sends Email & Prevents Redirection
 yesBtn.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevents form redirection
+    event.preventDefault(); // Prevents default form submission
 
     // Hide first page and show second page
     clickMeContainer.classList.add("hidden");
@@ -48,17 +48,22 @@ yesBtn.addEventListener("click", function(event) {
         yayImage.style.left = "0";  // Starts flying from left
     }, 500);
 
-    // Manually handle form submission via AJAX (prevent default submission)
+    // Manually send email via AJAX
     const formData = new FormData(emailForm);
-    
-    // Send form data via fetch
+
     fetch(emailForm.action, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-    }).then(response => {
+        body: formData
+    })
+    .then(response => {
         console.log("Email sent successfully");
-    }).catch(error => {
+    })
+    .catch(error => {
         console.error("Error:", error);
     });
+});
+
+// Prevent form submission in case it's triggered outside JavaScript
+emailForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Stops default behavior
 });
